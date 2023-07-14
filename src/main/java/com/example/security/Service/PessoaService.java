@@ -36,5 +36,25 @@ public class PessoaService {
     public Pessoa createPessoa(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
+
+
+    public List<Pessoa> getPessoaActive() {
+        return pessoaRepository.findAllByStatus(true);
+    }
+
+    public Pessoa updatePessoa(Pessoa pessoa) {
+        Long id = pessoa.getId();
+        if (id != null && pessoaRepository.existsById(id)) {
+            return pessoaRepository.save(pessoa);
+        }
+        return null;
+    }
+    public void deletePessoaById(Long id) {
+        pessoaRepository.deleteById(id);
+    }
+
+    public List<Pessoa> getPessoasByFilter(String filter) {
+        return pessoaRepository.findByFilter(filter);
+    }
 }
 
